@@ -21,6 +21,18 @@
 		if (firstSection) {
 			firstSection.classList.add('visible');
 		}
+
+		new daum.roughmap.Lander({
+			"timestamp" : "1754235915494",
+			"key" : "6rbx9jebbo2",
+			"mapWidth" : "100%", // 반응형으로 설정
+			"mapHeight" : "100%"  // 반응형으로 설정
+		}).render();
+
+
+
+
+
 	});
 </script>
 
@@ -31,34 +43,29 @@
 	<div class="hero-overlay"></div>
 	<div class="hero-content">
 		<div class="hero-text">
-			<h1>비전의 교회, 역동적인 사역</h1>
-			<p>장성한 성장, 역동적 사역, 헌신된 증거</p>
-			<h2>군산드림교회</h2>
+			<h1>"내가 이 반석 위에 내 교회를 세우리니"</h1>
+			<p>(마16:18)</p>
+			<h2>여산중앙교회</h2>
 		</div>
 		<div class="hero-actions">
-			<button class="action-btn primary">인사말</button>
-			<button class="action-btn secondary">예배안내</button>
-			<button class="action-btn secondary">주일설교</button>
-			<button class="action-btn secondary">오시는길</button>
+			<button class="action-btn primary" on:click={() => document.getElementById('new-section').scrollIntoView({ behavior: 'smooth', block: 'start' })}>교회소개</button>
+			<button class="action-btn secondary" on:click={() => document.getElementById('worship').scrollIntoView({ behavior: 'smooth', block: 'start' })}>예배안내</button>
+			<button class="action-btn secondary" on:click={() => document.getElementById('sermon').scrollIntoView({ behavior: 'smooth', block: 'start' })}>예배영상</button>
+			<button class="action-btn secondary" on:click={() => document.getElementById('road').scrollIntoView({ behavior: 'smooth', block: 'start' })}>오시는길</button>
 		</div>
 	</div>
-</section><!-- 교회안내 섹션 -->
-<section class="section about" id="about">
+</section>
+<!-- 교회소개 섹션 -->
+<section class="section new-section" id="new-section">
 	<div class="container">
-		<h2 class="section-title">교회안내</h2>
-		<div class="about-grid">
-			<div class="about-card">
-				<h3>비전</h3>
-				<p>하나님의 영광을 위해 충만한 예배와 하나된 교제를 통해 장성한 성장을 이루어가는 교회</p>
-			</div>
-			<div class="about-card">
-				<h3>사명</h3>
-				<p>복음 전파와 제자 양성을 통해 하나님 나라를 확장해 나가는 교회</p>
-			</div>
-			<div class="about-card">
-				<h3>핵심가치</h3>
-				<p>예배 · 교제 · 성장 · 사역 · 증거</p>
-			</div>
+		<h2 class="section-title">교회소개</h2>
+		<p class="subtitle">내가 이 반석 위에 내 교회를 세우리니 (마16:18)</p>
+		<div class="new-section-content">
+			<p>여산중앙교회는 대한예수교장로회 합동측 이리노회에 속한 교회(교회설립일 1960.5.20.)로,</p>
+			<p>예수 그리스도의 복음을 바르게 알고, 바르게 믿고, 더 나아가 바르게 살기를 힘쓰는 신앙 공동체입니다.</p>
+			<p>현재 윤찬영 목사(2025년~)가 시무하고 있으며,</p>
+			<p>말씀 중심의 예배와 다음 세대, 지역 사회, 선교 활동에 힘쓰며,</p>
+			<p>말씀대로 삶 속에서 살아내기 위해 힘쓰는 교회입니다.</p>
 		</div>
 	</div>
 </section>
@@ -67,162 +74,87 @@
 <section class="section worship" id="worship">
 	<div class="container">
 		<h2 class="section-title">예배 안내</h2>
-		<div class="worship-schedule">
-			<div class="schedule-card">
-				<h3>주일 대예배</h3>
-				<p class="time">오전 11:00</p>
-				<p class="location">본당</p>
+		<div class="worship-groups">
+			<div class="worship-group">
+				<h3>장년 예배</h3>
+				<div class="worship-schedule">
+					<div class="schedule-card">
+						<h3>새벽기도회</h3>
+						<p class="time">오전 05:00</p>
+						<p class="location">본당</p>
+					</div>
+					<div class="schedule-card">
+						<h3>주일 오전예배</h3>
+						<p class="time">오전 10:30</p>
+						<p class="location">본당</p>
+					</div>
+					<div class="schedule-card">
+						<h3>주일 오후예배</h3>
+						<p class="time">오후 3:00</p>
+						<p class="location">본당</p>
+					</div>
+					<div class="schedule-card">
+						<h3>수요예배</h3>
+						<p class="time">오후 7:30</p>
+						<p class="location">본당</p>
+					</div>
+					<div class="schedule-card">
+						<h3>만나공동체</h3>
+						<p class="time">오후 12:30</p>
+						<p class="location">교육관(식당)</p>
+					</div>
+					<div class="schedule-card">
+						<h3>구역공동체</h3>
+						<p class="time">정해진 시간</p>
+						<p class="location">정해진 장소</p>
+					</div>
+				</div>
 			</div>
-			<div class="schedule-card">
-				<h3>주일 오후예배</h3>
-				<p class="time">오후 2:00</p>
-				<p class="location">본당</p>
-			</div>
-			<div class="schedule-card">
-				<h3>수요예배</h3>
-				<p class="time">오후 7:30</p>
-				<p class="location">본당</p>
-			</div>
-			<div class="schedule-card">
-				<h3>금요기도회</h3>
-				<p class="time">오후 7:30</p>
-				<p class="location">본당</p>
-			</div>
-		</div>
-	</div>
-</section>
-
-<!-- 교회학교 섹션 -->
-<section class="section education" id="education">
-	<div class="container">
-		<h2 class="section-title">교회학교</h2>
-		<div class="education-departments">
-			<div class="dept-card">
-				<h3>유아부</h3>
-				<p>만 3-5세</p>
-				<p>주일 오전 11시</p>
-			</div>
-			<div class="dept-card">
-				<h3>유치부</h3>
-				<p>만 6-7세</p>
-				<p>주일 오전 11시</p>
-			</div>
-			<div class="dept-card">
-				<h3>초등부</h3>
-				<p>초등학교 1-6학년</p>
-				<p>주일 오전 11시</p>
-			</div>
-			<div class="dept-card">
-				<h3>중고등부</h3>
-				<p>중학교 1학년 - 고등학교 3학년</p>
-				<p>주일 오전 11시</p>
-			</div>
-			<div class="dept-card">
-				<h3>청년부</h3>
-				<p>대학생 및 청년</p>
-				<p>주일 오후 1시</p>
-			</div>
-		</div>
-	</div>
-</section>
-
-<!-- 선교 섹션 -->
-<section class="section mission" id="mission">
-	<div class="container">
-		<h2 class="section-title">선교</h2>
-		<div class="mission-content">
-			<div class="mission-type">
-				<h3>국내선교</h3>
-				<ul>
-					<li>지역 복음화 사역</li>
-					<li>농어촌 교회 지원</li>
-					<li>도시 개척교회 후원</li>
-				</ul>
-			</div>
-			<div class="mission-type">
-				<h3>해외선교</h3>
-				<ul>
-					<li>아시아 선교</li>
-					<li>아프리카 선교</li>
-					<li>단기선교팀 파송</li>
-				</ul>
+			<div class="worship-group">
+				<h3>다음세대 예배</h3>
+				<div class="worship-schedule">
+					<div class="schedule-card">
+						<h3>주일학교</h3>
+						<p class="time">주일 오전 11:50</p>
+						<p class="location">교육관</p>
+					</div>
+					<div class="schedule-card">
+						<h3>청소년부</h3>
+						<p class="time">주일 오전 11:50</p>
+						<p class="location">본당</p>
+					</div>
+					<div class="schedule-card">
+						<h3>청년부</h3>
+						<p class="time">주일 오후 02:00</p>
+						<p class="location">교육관</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </section>
 
-<!-- 양육/훈련 섹션 -->
-<section class="section training" id="training">
+<!-- 예배영상 섹션 -->
+<section class="section sermon" id="sermon">
 	<div class="container">
-		<h2 class="section-title">양육/훈련</h2>
-		<div class="training-programs">
-			<div class="program-card">
-				<h3>새가족반</h3>
-				<p>새로 등록하신 분들을 위한 기초 신앙교육</p>
-			</div>
-			<div class="program-card">
-				<h3>성경공부</h3>
-				<p>체계적인 성경 말씀 공부</p>
-			</div>
-			<div class="program-card">
-				<h3>제자훈련</h3>
-				<p>영적 성숙을 위한 집중 훈련</p>
-			</div>
-			<div class="program-card">
-				<h3>리더훈련</h3>
-				<p>교회 지도자 양성 과정</p>
+		<h2 class="section-title">금주의 말씀</h2>
+		<p class="sermon-info">담임목사의 주일예배 영상을 보실 수 있습니다.</p>
+		<div class="sermon-details">
+			<h3 class="sermon-title">나오미의 용기, 룻의 결단 (룻기 1:16-17)</h3>
+			<p class="sermon-meta">설교자: 윤찬영 목사 / 설교일: 2025-08-03</p>
+			<div class="sermon-actions">
+				<button class="action-btn primary" on:click={() => window.open('https://www.youtube.com/watch?v=1Uxc6DCmu-Q', '_blank')}>설교말씀보기</button>
+				<button class="action-btn secondary" on:click={() => window.open('https://www.youtube.com/@%EB%8C%80%ED%95%9C%EC%98%88%EC%88%98%EA%B5%90%EC%9E%A5%EB%A1%9C%ED%9A%8C%EC%97%AC%EC%82%B0/featured', '_blank')}>영상더보기</button>
 			</div>
 		</div>
 	</div>
 </section>
 
-<!-- 나눔·복지 섹션 -->
-<section class="section welfare" id="welfare">
+<!-- 오시는길 섹션 -->
+<section class="section road" id="road">
 	<div class="container">
-		<h2 class="section-title">나눔·복지</h2>
-		<div class="welfare-activities">
-			<div class="activity-card">
-				<h3>지역사회 봉사</h3>
-				<p>어려운 이웃을 위한 나눔 활동</p>
-			</div>
-			<div class="activity-card">
-				<h3>노인 돌봄</h3>
-				<p>어르신들을 위한 방문 돌봄 사역</p>
-			</div>
-			<div class="activity-card">
-				<h3>장학 사업</h3>
-				<p>어려운 학생들을 위한 장학금 지원</p>
-			</div>
-		</div>
-	</div>
-</section>
-
-<!-- 커뮤니티 섹션 -->
-<section class="section community" id="community">
-	<div class="container">
-		<h2 class="section-title">커뮤니티</h2>
-		<div class="community-grid">
-			<div class="community-card">
-				<h3>공지사항</h3>
-				<ul>
-					<li>새해 특별새벽기도회 안내</li>
-					<li>교회학교 교사 모집</li>
-					<li>주차장 이용 안내</li>
-				</ul>
-			</div>
-			<div class="community-card">
-				<h3>교회소식</h3>
-				<ul>
-					<li>선교지 소식</li>
-					<li>새가족 소개</li>
-					<li>행사 후기</li>
-				</ul>
-			</div>
-			<div class="community-card">
-				<h3>갤러리</h3>
-				<p>교회 행사 및 활동 사진</p>
-			</div>
-		</div>
+		<h2 class="section-title">오시는 길</h2>
+		<div id="daumRoughmapContainer1754235915494" class="root_daum_roughmap root_daum_roughmap_landing"></div>
 	</div>
 </section>
 
@@ -295,7 +227,7 @@
 		position: relative;
 		z-index: 2;
 		text-align: center;
-		max-width: 800px;
+		max-width: 1000px;
 		padding: 0 20px;
 	}
 
@@ -321,6 +253,7 @@
 		display: flex;
 		gap: 15px;
 		flex-wrap: wrap;
+		justify-content: center;
 	}
 
 	.action-btn {
@@ -349,37 +282,26 @@
 		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 	}
 
-	/* 교회안내 섹션 */
-	.about {
-		background: #f8f9fa;
+	/* 예배안내 섹션 */
+	.worship-groups {
+		display: flex;
+		flex-direction: column; /* 상하로 구분 */
+		gap: 50px;
+		justify-content: center;
 	}
 
-	.about-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		gap: 30px;
+	.worship-group {
+		flex: 1;
+		min-width: 300px;
 	}
 
-	.about-card {
-		background: white;
-		padding: 40px 30px;
-		border-radius: 12px;
+	.worship-group h3 {
 		text-align: center;
-		box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-		transition: transform 0.3s ease;
-	}
-
-	.about-card:hover {
-		transform: translateY(-5px);
-	}
-
-	.about-card h3 {
-		font-size: 1.5rem;
+		font-size: 1.8rem;
 		color: #2c5282;
 		margin-bottom: 20px;
 	}
 
-	/* 예배안내 섹션 */
 	.worship-schedule {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -412,146 +334,114 @@
 		color: #666;
 	}
 
-	/* 교회학교 섹션 */
-	.education {
+	/* 예배영상 섹션 스타일 */
+	.sermon {
 		background: #f8f9fa;
-	}
-
-	.education-departments {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-		gap: 25px;
-	}
-
-	.dept-card {
-		background: white;
-		padding: 30px 20px;
-		border-radius: 12px;
+		padding: 80px 0;
 		text-align: center;
-		box-shadow: 0 3px 20px rgba(0, 0, 0, 0.1);
 	}
 
-	.dept-card h3 {
-		color: #2c5282;
-		margin-bottom: 15px;
+	.sermon-info {
 		font-size: 1.2rem;
-	}
-
-	/* 선교 섹션 */
-	.mission-content {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		gap: 50px;
-	}
-
-	.mission-type h3 {
-		color: #2c5282;
-		font-size: 1.5rem;
+		color: #666;
 		margin-bottom: 20px;
 	}
 
-	.mission-type ul {
-		list-style: none;
-	}
-
-	.mission-type li {
-		padding: 10px 0;
-		border-bottom: 1px solid #eee;
-		position: relative;
-		padding-left: 20px;
-	}
-
-	.mission-type li::before {
-		content: '→';
-		position: absolute;
-		left: 0;
+	.sermon-title {
+		font-size: 2rem;
 		color: #2c5282;
+		margin-bottom: 10px;
 		font-weight: bold;
 	}
 
-	/* 양육/훈련 섹션 */
-	.training {
-		background: #f8f9fa;
+	.sermon-meta {
+		font-size: 1rem;
+		color: #333;
+		margin-bottom: 30px;
 	}
 
-	.training-programs {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-		gap: 30px;
+	.sermon-actions {
+		display: flex;
+		gap: 15px;
+		justify-content: center;
 	}
 
-	.program-card {
-		background: white;
-		padding: 35px 25px;
-		border-radius: 12px;
-		text-align: center;
-		box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-	}
-
-	.program-card h3 {
-		color: #2c5282;
-		margin-bottom: 15px;
-		font-size: 1.3rem;
-	}
-
-	/* 나눔·복지 섹션 */
-	.welfare-activities {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		gap: 30px;
-	}
-
-	.activity-card {
-		background: white;
-		padding: 40px 30px;
-		border-radius: 12px;
-		text-align: center;
-		box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-	}
-
-	.activity-card h3 {
-		color: #2c5282;
-		margin-bottom: 15px;
-		font-size: 1.3rem;
-	}
-
-	/* 커뮤니티 섹션 */
-	.community {
-		background: #f8f9fa;
-	}
-
-	.community-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		gap: 30px;
-	}
-
-	.community-card {
-		background: white;
-		padding: 40px 30px;
-		border-radius: 12px;
-		box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-	}
-
-	.community-card h3 {
-		color: #2c5282;
-		margin-bottom: 20px;
-		font-size: 1.3rem;
-	}
-
-	.community-card ul {
-		list-style: none;
-	}
-
-	.community-card li {
-		padding: 8px 0;
-		border-bottom: 1px solid #f0f0f0;
-		color: #666;
-	}
-
-	.community-card li:hover {
-		color: #2c5282;
+	.action-btn.primary {
+		background: #2c5282;
+		color: white;
+		padding: 10px 20px;
+		border-radius: 5px;
+		font-size: 1rem;
 		cursor: pointer;
+		transition: background 0.3s ease;
+	}
+
+	.action-btn.primary:hover {
+		background: #1a365d;
+	}
+
+	.action-btn.secondary {
+		background: transparent;
+		color: #2c5282;
+		border: 2px solid #2c5282;
+		padding: 10px 20px;
+		border-radius: 5px;
+		font-size: 1rem;
+		cursor: pointer;
+		transition: background 0.3s ease, color 0.3s ease;
+	}
+
+	.action-btn.secondary:hover {
+		background: #2c5282;
+		color: white;
+	}
+
+	/* 오시는길 섹션 */
+	.road {
+		background: white;
+	}
+
+	/* 새로운 섹션 스타일 */
+	.new-section {
+		background: #f8f9fa;
+		padding: 80px 0;
+		color: #333;
+	}
+
+	.new-section .subtitle {
+		font-size: 1.7rem;
+		color: #e53e3e;
+		text-align: center;
+		margin-bottom: 20px;
+	}
+
+	.new-section-content {
+		max-width: 800px;
+		margin: 0 auto;
+		line-height: 1.8;
+		font-size: 1.2rem;
+		color: #333;
+		text-align: center;
+	}
+
+	.new-section-content p {
+		margin-bottom: 20px;
+	}
+
+	/* 오시는 길 섹션 반응형 스타일 */
+	#daumRoughmapContainer1754235915494 {
+		width: 100%;
+		height: auto; /* 높이를 자동으로 조정 */
+		min-height: 500px; /* 최소 높이 설정 */
+		position: relative;
+	}
+
+	#daumRoughmapContainer1754235915494 iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
 	}
 
 	/* 반응형 디자인 */
