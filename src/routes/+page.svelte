@@ -41,6 +41,10 @@
 	<!-- 히어로 섹션 -->
 <section class="hero section visible" id="hero">
 	<div class="hero-overlay"></div>
+	<video class="hero-video" autoplay muted loop>
+		<source src="/background.mp4" type="video/mp4">
+		Your browser does not support the video tag.
+	</video>
 	<div class="hero-content">
 		<div class="hero-text">
 			<h1>"내가 이 반석 위에 내 교회를 세우리니"</h1>
@@ -203,14 +207,19 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background-image: url('/church_01.jpg');
-		background-size: cover;
-		background-position: center;
-		background-repeat: no-repeat;
-		background-attachment: fixed;
-		color: white;
 		position: relative;
+		color: white;
 		overflow: hidden;
+	}
+
+	.hero-video {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		z-index: 0;
 	}
 
 	.hero-overlay {
