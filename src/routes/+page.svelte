@@ -70,6 +70,7 @@
 			<p>현재 윤찬영 목사가 시무하고 있으며,</p>
 			<p>말씀 중심의 예배와 다음 세대, 지역 사회, 선교 활동에 힘쓰며,</p>
 			<p>말씀대로 삶 속에서 살아내기 위해 힘쓰는 교회입니다.</p>
+			<p style="margin-top: 10px;font-size: 1.4rem;font-weight: bold;color: orange;">담임목사 윤찬영</p>
 		</div>
 	</div>
 </section>
@@ -412,14 +413,30 @@
 
 	/* 새로운 섹션 스타일 */
 	.new-section {
-		background: #f8f9fa;
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/bg_001.jpg');
+		background-size: cover;
+		background-position: center;
+		background-attachment: fixed;
 		padding: 80px 0;
-		color: #333;
+		color: white;
+		position: relative;
+	}
+
+	.new-section .section-title {
+		color: white;
+	}
+
+	.new-section .section-title::after {
+		background: white;
 	}
 
 	.new-section .subtitle {
 		font-size: 1.7rem;
-		color: #e53e3e;
+		color: #ffd700;
 		text-align: center;
 		margin-bottom: 20px;
 	}
@@ -429,7 +446,7 @@
 		margin: 0 auto;
 		line-height: 1.8;
 		font-size: 1.2rem;
-		color: #333;
+		color: white;
 		text-align: center;
 	}
 
@@ -445,17 +462,13 @@
 		position: relative;
 	}
 
-	#daumRoughmapContainer1754235915494 iframe {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-	}
-
 	/* 반응형 디자인 */
 	@media (max-width: 768px) {
 		.hero {
+			background-attachment: scroll; /* 모바일에서는 fixed 배경 제거 */
+		}
+
+		.new-section {
 			background-attachment: scroll; /* 모바일에서는 fixed 배경 제거 */
 		}
 

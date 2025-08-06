@@ -248,20 +248,6 @@
 		gap: 15px;
 	}
 
-	.search-btn {
-		background: none;
-		border: none;
-		font-size: 18px;
-		cursor: pointer;
-		padding: 8px;
-		border-radius: 50%;
-		transition: background 0.3s ease;
-	}
-
-	.search-btn:hover {
-		background: #f0f0f0;
-	}
-
 	.login-link,
 	.member-link {
 		text-decoration: none;
@@ -273,15 +259,6 @@
 	.login-link:hover,
 	.member-link:hover {
 		color: #2c5282;
-	}
-
-	.language-select {
-		border: 1px solid #ddd;
-		border-radius: 4px;
-		padding: 5px 10px;
-		font-size: 12px;
-		background: white;
-		cursor: pointer;
 	}
 
 	/* 메인 콘텐츠 */
