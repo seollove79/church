@@ -1,7 +1,12 @@
 <script>
 	import favicon from '$lib/assets/favicon.svg';
 
-	let { children } = $props();
+	export let children;
+	let isMenuOpen = false;
+
+	function toggleMenu() {
+		isMenuOpen = !isMenuOpen;
+	}
 </script>
 
 <svelte:head>
@@ -19,9 +24,14 @@
 			<span class="logo-text">여산중앙교회</span>
 		</div>
 
+		<!-- 햄버거 메뉴 버튼 -->
+		<button class="hamburger-menu" on:click={toggleMenu}>
+			☰
+		</button>
+
 		<!-- 메인 네비게이션 -->
 		<nav class="nav">
-			<ul class="nav-menu">
+			<ul class="nav-menu {isMenuOpen ? 'open' : ''}">
 				<li class="nav-item">
 					<a href="#about" class="nav-link">교회안내</a>
 					<div class="dropdown">
@@ -84,13 +94,8 @@
 
 		<!-- 우측 유틸리티 메뉴 -->
 		<div class="utility">
-			<button class="search-btn">🔍</button>
 			<a href="#login" class="login-link">로그인</a>
 			<a href="#member" class="member-link">회원가입</a>
-			<select class="language-select">
-				<option value="ko">한국어</option>
-				<option value="en">English</option>
-			</select>
 		</div>
 	</div>
 </header>
@@ -285,6 +290,25 @@
 		min-height: calc(100vh - 80px);
 	}
 
+	/* 햄버거 메뉴 스타일 */
+	.hamburger-menu {
+		position: absolute;
+		right: 20px;
+		top: 50%;
+		transform: translateY(-50%);
+		display: none;
+		background: none;
+		border: none;
+		font-size: 24px;
+		cursor: pointer;
+		padding: 10px;
+		transition: background 0.3s ease;
+	}
+
+	.hamburger-menu:hover {
+		background: #f0f0f0;
+	}
+
 	/* 반응형 디자인 */
 	@media (max-width: 1024px) {
 		.header-container {
@@ -313,8 +337,33 @@
 			font-size: 20px;
 		}
 
-		.nav {
-			display: none; /* 모바일에서는 햄버거 메뉴로 대체 필요 */
+		.nav-menu {
+			display: none; /* 기본적으로 숨김 */
+			flex-direction: column;
+		}
+
+		.nav-menu.open {
+			display: flex !important;
+			position: absolute;
+			top: 60px;
+			left: 0;
+			width: 100%;
+			background: white;
+			box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+			padding: 20px;
+			z-index: 1000;
+			flex-direction: column;
+			gap: 0;
+		}
+
+		.nav-menu.open .nav-item {
+			margin-bottom: 15px;
+			border-bottom: 1px solid #eee;
+			padding-bottom: 10px;
+		}
+
+		.nav-menu.open .nav-item:last-child {
+			border-bottom: none;
 		}
 
 		.utility {
@@ -324,6 +373,10 @@
 		.login-link,
 		.member-link {
 			display: none; /* 모바일에서는 숨김 */
+		}
+
+		.hamburger-menu {
+			display: block;
 		}
 	}
 </style>
