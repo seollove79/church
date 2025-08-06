@@ -6,8 +6,8 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
-	<title>여산중앙교회 - 충만한 예배, 하나된 교제</title>
-	<meta name="description" content="충만한 예배, 하나된 교제, 장성한 성장, 역동적 사역, 헌신된 증거" />
+	<title>여산중앙교회</title>
+	<meta name="description" content="여산중앙교회" />
 </svelte:head>
 
 <!-- 고정 상단 헤더 -->
