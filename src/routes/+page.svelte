@@ -145,8 +145,8 @@
 		<h2 class="section-title">금주의 말씀</h2>
 		<p class="sermon-info">담임목사의 주일예배 영상을 보실 수 있습니다.</p>
 		<div class="sermon-details">
-			<h3 class="sermon-title">나오미의 용기, 룻의 결단 (룻기 1:16-17)</h3>
-			<p class="sermon-meta">설교자: 윤찬영 목사 / 설교일: 2025-08-03</p>
+			<h3 class="sermon-title">기도로 지켜낸 한나 (사무엘상 1:1-20)</h3>
+			<p class="sermon-meta">설교자: 윤찬영 목사 / 설교일: 2025-08-24</p>
 			<div class="sermon-actions">
 				<button class="action-btn primary" on:click={() => window.open('https://www.youtube.com/watch?v=1Uxc6DCmu-Q', '_blank')}>설교말씀보기</button>
 				<button class="action-btn secondary" on:click={() => window.open('https://www.youtube.com/@%EB%8C%80%ED%95%9C%EC%98%88%EC%88%98%EA%B5%90%EC%9E%A5%EB%A1%9C%ED%9A%8C%EC%97%AC%EC%82%B0/featured', '_blank')}>영상더보기</button>
