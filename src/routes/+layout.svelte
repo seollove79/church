@@ -155,7 +155,7 @@
 	}
 
 	.logo-text {
-		font-size: 24px;
+		font-size: 30px;
 		font-weight: 700;
 		color: #2c5282;
 	}
