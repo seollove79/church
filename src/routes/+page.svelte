@@ -42,7 +42,7 @@
 <section class="hero section visible" id="hero">
 	<div class="hero-overlay"></div>
 	<video class="hero-video" autoplay muted loop>
-		<source src="/background.mp4" type="video/mp4">
+		<source src="/background_01.mp4" type="video/mp4">
 		Your browser does not support the video tag.
 	</video>
 	<div class="hero-content">
@@ -145,10 +145,10 @@
 		<h2 class="section-title">금주의 말씀</h2>
 		<p class="sermon-info">담임목사의 주일예배 영상을 보실 수 있습니다.</p>
 		<div class="sermon-details">
-			<h3 class="sermon-title">하나님의 사람 사무엘 (사무엘상 7:3-14)</h3>
-			<p class="sermon-meta">설교자: 윤찬영 목사 / 설교일: 2025-08-31</p>
+			<h3 class="sermon-title">사울왕의 실패 (사무엘상 15:1-9)</h3>
+			<p class="sermon-meta">설교자: 윤찬영 목사 / 설교일: 2025-09-07</p>
 			<div class="sermon-actions">
-				<button class="action-btn primary" on:click={() => window.open('https://www.youtube.com/watch?v=P1TAG0QjeFw', '_blank')}>설교말씀보기</button>
+				<button class="action-btn primary" on:click={() => window.open('https://www.youtube.com/watch?v=9xhT1En5mm0', '_blank')}>설교말씀보기</button>
 				<button class="action-btn secondary" on:click={() => window.open('https://www.youtube.com/@%EB%8C%80%ED%95%9C%EC%98%88%EC%88%98%EA%B5%90%EC%9E%A5%EB%A1%9C%ED%9A%8C%EC%97%AC%EC%82%B0/featured', '_blank')}>영상더보기</button>
 			</div>
 		</div>
