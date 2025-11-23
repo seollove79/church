@@ -42,7 +42,7 @@
 <section class="hero section visible" id="hero">
 	<div class="hero-overlay"></div>
 	<video class="hero-video" autoplay muted loop>
-		<source src="/background_01.mp4" type="video/mp4">
+		<source src="/background_02.mp4" type="video/mp4">
 		Your browser does not support the video tag.
 	</video>
 	<div class="hero-content">
