@@ -286,6 +286,45 @@
 		background: #f0f0f0;
 	}
 
+	/* 공통 레이아웃 */
+	:global(.container) {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 20px;
+	}
+
+	/* 섹션 공통 (스크롤 fade-in 애니메이션) */
+	:global(.section) {
+		padding: 100px 0;
+		opacity: 0;
+		transform: translateY(50px);
+		transition: all 0.8s ease;
+	}
+
+	:global(.section.visible) {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	:global(.section-title) {
+		text-align: center;
+		font-size: 2.5rem;
+		color: #2c5282;
+		margin-bottom: 60px;
+		position: relative;
+	}
+
+	:global(.section-title::after) {
+		content: '';
+		position: absolute;
+		bottom: -15px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 60px;
+		height: 3px;
+		background: #2c5282;
+	}
+
 	/* 반응형 디자인 */
 	@media (max-width: 1024px) {
 		.header-container {
