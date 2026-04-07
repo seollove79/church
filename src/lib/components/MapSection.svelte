@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import ScrollToTop from '$lib/components/ScrollToTop.svelte';
 
 	onMount(() => {
 		new daum.roughmap.Lander({
@@ -19,10 +20,12 @@
 			class="root_daum_roughmap root_daum_roughmap_landing"
 		></div>
 	</div>
+	<ScrollToTop />
 </section>
 
 <style>
 	.road {
+		position: relative;
 		background: white;
 	}
 

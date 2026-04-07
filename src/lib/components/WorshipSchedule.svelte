@@ -1,3 +1,7 @@
+<script>
+	import ScrollToTop from '$lib/components/ScrollToTop.svelte';
+</script>
+
 <section class="section worship" id="worship">
 	<div class="container">
 		<h2 class="section-title">예배 안내</h2>
@@ -59,9 +63,14 @@
 			</div>
 		</div>
 	</div>
+	<ScrollToTop />
 </section>
 
 <style>
+	.worship {
+		position: relative;
+	}
+
 	.worship-groups {
 		display: flex;
 		flex-direction: column;

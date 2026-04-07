@@ -1,3 +1,7 @@
+<script>
+	import ScrollToTop from '$lib/components/ScrollToTop.svelte';
+</script>
+
 <section class="section sermon" id="sermon">
 	<div class="container">
 		<h2 class="section-title">금주의 말씀</h2>
@@ -21,10 +25,12 @@
 			</div>
 		</div>
 	</div>
+	<ScrollToTop />
 </section>
 
 <style>
 	.sermon {
+		position: relative;
 		background: #f8f9fa;
 		padding: 80px 0;
 		text-align: center;

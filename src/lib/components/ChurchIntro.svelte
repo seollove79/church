@@ -1,3 +1,7 @@
+<script>
+	import ScrollToTop from '$lib/components/ScrollToTop.svelte';
+</script>
+
 <section class="section new-section" id="new-section">
 	<div class="container">
 		<h2 class="section-title">교회소개</h2>
@@ -11,10 +15,12 @@
 			<p style="margin-top: 10px;font-size: 1.4rem;font-weight: bold;color: orange;">담임목사 윤찬영</p>
 		</div>
 	</div>
+	<ScrollToTop />
 </section>
 
 <style>
 	.new-section {
+		position: relative;
 		min-height: 100vh;
 		display: flex;
 		align-items: center;
