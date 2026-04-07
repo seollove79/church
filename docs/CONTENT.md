@@ -1,13 +1,13 @@
 # CONTENT.md — 콘텐츠 수정 가이드
 
 코드를 몰라도 이 문서만 보면 주요 콘텐츠를 수정할 수 있습니다.
-모든 수정은 `src/routes/+page.svelte` 파일에서 이루어집니다.
+각 섹션은 독립된 컴포넌트 파일로 분리되어 있습니다.
 
 ---
 
 ## 1. 설교 영상 업데이트
 
-**위치**: `src/routes/+page.svelte` — `#sermon` 섹션 (143~156줄 근처)
+**위치**: `src/lib/components/SermonSection.svelte`
 
 ### 수정할 항목
 
@@ -34,7 +34,7 @@
 
 ## 2. 예배 시간표 수정
 
-**위치**: `src/routes/+page.svelte` — `#worship` 섹션 (79~140줄 근처)
+**위치**: `src/lib/components/WorshipSchedule.svelte`
 
 ### 장년 예배 (6개)
 
@@ -72,7 +72,7 @@
 
 ## 3. 교회소개 텍스트 수정
 
-**위치**: `src/routes/+page.svelte` — `#new-section` 섹션 (63~76줄 근처)
+**위치**: `src/lib/components/ChurchIntro.svelte`
 
 ```svelte
 <div class="new-section-content">
@@ -89,7 +89,7 @@
 
 ## 4. 히어로 섹션 수정
 
-**위치**: `src/routes/+page.svelte` — `#hero` 섹션 (42~61줄 근처)
+**위치**: `src/lib/components/Hero.svelte`
 
 ### 슬로건 텍스트
 
@@ -149,7 +149,7 @@
 
 ## 6. 오시는길 (카카오맵)
 
-**위치**: `src/routes/+page.svelte` — `#road` 섹션
+**위치**: `src/lib/components/MapSection.svelte`
 
 > ⚠️ 카카오맵 설정은 임의로 수정하지 마세요.
 > 지도 위치나 API key 변경이 필요한 경우 Claude에게 요청하세요.

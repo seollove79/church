@@ -11,14 +11,20 @@
 church/
 ├── src/
 │   ├── routes/
-│   │   ├── +layout.svelte       # 모든 페이지 공통 레이아웃
-│   │   └── +page.svelte         # 메인 페이지 (/)
+│   │   ├── +layout.svelte           # 모든 페이지 공통 레이아웃 + 전역 스타일
+│   │   └── +page.svelte             # 메인 페이지 (컴포넌트 조립만, ~20줄)
 │   ├── lib/
+│   │   ├── components/              # 섹션 컴포넌트
+│   │   │   ├── Hero.svelte          # 히어로 섹션
+│   │   │   ├── ChurchIntro.svelte   # 교회소개 섹션
+│   │   │   ├── WorshipSchedule.svelte  # 예배안내 섹션
+│   │   │   ├── SermonSection.svelte # 금주의 말씀 섹션
+│   │   │   └── MapSection.svelte    # 오시는길 섹션 (카카오맵 초기화)
 │   │   ├── assets/
-│   │   │   └── favicon.svg      # 브라우저 탭 아이콘
-│   │   └── index.js             # 공용 모듈 진입점 (현재 비어있음)
-│   └── app.html                 # HTML 루트 템플릿
-├── static/                      # 빌드 시 그대로 복사되는 정적 파일
+│   │   │   └── favicon.svg          # 브라우저 탭 아이콘
+│   │   └── index.js                 # 공용 모듈 진입점 (현재 비어있음)
+│   └── app.html                     # HTML 루트 템플릿 (카카오맵 스크립트 로드)
+├── static/                          # 빌드 시 그대로 복사되는 정적 파일
 │   ├── background_02.mp4        # 히어로 배경 영상 (현재 사용)
 │   ├── background_01.mp4        # 예비 영상
 │   ├── background.mp4           # 예비 영상
@@ -94,6 +100,9 @@ src/routes/
 └── <style>
     ├── :global(*) 리셋
     ├── :global(body) 기본 폰트
+    ├── :global(.container)      # 최대 너비 1200px 레이아웃
+    ├── :global(.section)        # 섹션 공통 + fade-in 애니메이션
+    ├── :global(.section-title)  # 섹션 제목 공통 스타일
     ├── 헤더 스타일
     ├── 네비게이션 스타일
     ├── 드롭다운 스타일
@@ -104,46 +113,58 @@ src/routes/
 
 ## +page.svelte 구조
 
-메인 페이지(`/`)의 전체 구조입니다.
+메인 페이지(`/`)는 컴포넌트를 조립하는 역할만 합니다 (~20줄).
 
 ```
 +page.svelte
 ├── <script>
-│   ├── import { onMount }
-│   ├── scrollY, innerHeight 변수
-│   ├── handleScroll()           # 섹션 fade-in 트리거
-│   └── onMount()
-│       ├── 첫 섹션 visible 처리
-│       └── daum.roughmap.Lander # 카카오맵 초기화
-├── <svelte:window>              # scrollY, innerHeight 바인딩
-├── 섹션 1: #hero
-│   ├── .hero-overlay            # 어두운 오버레이
-│   ├── <video>                  # 배경 영상
-│   ├── .hero-text               # 슬로건, 교회명
-│   └── .hero-actions            # CTA 버튼 4개
-├── 섹션 2: #new-section (교회소개)
-│   ├── .section-title
-│   ├── .subtitle
-│   └── .new-section-content    # 교회 소개 텍스트
-├── 섹션 3: #worship (예배안내)
-│   ├── .worship-group           # 장년 예배
-│   │   └── .worship-schedule   # 6개 .schedule-card
-│   └── .worship-group           # 다음세대 예배
-│       └── .worship-schedule   # 3개 .schedule-card
-├── 섹션 4: #sermon (금주의 말씀)
-│   ├── .sermon-title
-│   ├── .sermon-meta
-│   └── .sermon-actions         # 설교말씀보기, 영상더보기 버튼
-├── 섹션 5: #road (오시는길)
-│   └── #daumRoughmapContainer  # 카카오맵 마운트 포인트
-└── <style>
-    ├── .container 레이아웃
-    ├── .section 공통 (fade-in 애니메이션)
-    ├── 히어로 스타일
-    ├── 예배안내 스타일
-    ├── 설교영상 스타일
-    ├── 오시는길 스타일
-    └── 반응형 미디어쿼리
+│   ├── import Hero, ChurchIntro, WorshipSchedule, SermonSection, MapSection
+│   ├── innerHeight 변수
+│   └── handleScroll()           # 섹션 fade-in 트리거
+├── <svelte:window>              # innerHeight 바인딩, scroll 이벤트
+├── <Hero />                     # → Hero.svelte
+├── <ChurchIntro />              # → ChurchIntro.svelte
+├── <WorshipSchedule />          # → WorshipSchedule.svelte
+├── <SermonSection />            # → SermonSection.svelte
+└── <MapSection />               # → MapSection.svelte
+```
+
+## 컴포넌트별 구조
+
+### Hero.svelte (`#hero`)
+```
+├── .hero-overlay            # 어두운 오버레이
+├── <video>                  # 배경 영상 (/background_02.mp4)
+├── .hero-text               # 슬로건, 교회명
+└── .hero-actions            # CTA 버튼 4개 (scrollIntoView)
+```
+
+### ChurchIntro.svelte (`#new-section`)
+```
+├── .section-title
+├── .subtitle                # 금색 부제목
+└── .new-section-content     # 교회 소개 텍스트, 담임목사
+```
+
+### WorshipSchedule.svelte (`#worship`)
+```
+├── .worship-group           # 장년 예배
+│   └── .worship-schedule   # 6개 .schedule-card
+└── .worship-group           # 다음세대 예배
+    └── .worship-schedule   # 3개 .schedule-card
+```
+
+### SermonSection.svelte (`#sermon`)
+```
+├── .sermon-title
+├── .sermon-meta
+└── .sermon-actions         # 설교말씀보기, 영상더보기 버튼
+```
+
+### MapSection.svelte (`#road`)
+```
+├── <script> onMount()       # daum.roughmap.Lander 초기화
+└── #daumRoughmapContainer   # 카카오맵 마운트 포인트
 ```
 
 ---
@@ -178,38 +199,7 @@ import { page } from '$app/stores';
 
 ---
 
-## 컴포넌트 분리 계획
-
-현재 모든 코드가 `+page.svelte` 한 파일에 있습니다.
-향후 아래와 같이 분리하면 유지보수가 쉬워집니다.
-
-```
-src/lib/components/
-├── Hero.svelte              # 히어로 섹션
-├── ChurchIntro.svelte       # 교회소개 섹션
-├── WorshipSchedule.svelte   # 예배안내 섹션
-├── SermonSection.svelte     # 금주의 말씀 섹션
-└── MapSection.svelte        # 오시는길 섹션
-```
-
-분리 후 `+page.svelte`:
-```svelte
-<script>
-  import Hero from '$lib/components/Hero.svelte';
-  import ChurchIntro from '$lib/components/ChurchIntro.svelte';
-  // ...
-</script>
-
-<Hero />
-<ChurchIntro />
-<WorshipSchedule />
-<SermonSection />
-<MapSection />
-```
-
----
-
-## 데이터 분리 계획
+## 데이터 분리 계획 (향후)
 
 콘텐츠를 코드와 분리하면 비개발자도 수정하기 쉬워집니다.
 

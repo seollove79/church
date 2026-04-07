@@ -35,13 +35,19 @@ Claude와 협업 시 이 파일이 자동으로 로드됩니다.
 ```
 src/
 ├── routes/
-│   ├── +layout.svelte   # 헤더, 전역 네비게이션, 전역 스타일
-│   └── +page.svelte     # 메인 페이지 (5개 섹션 전체 포함)
+│   ├── +layout.svelte          # 헤더, 전역 네비게이션, 전역 스타일
+│   └── +page.svelte            # 메인 페이지 (컴포넌트 조립만, ~20줄)
 ├── lib/
+│   ├── components/             # 섹션 컴포넌트
+│   │   ├── Hero.svelte         # 히어로 섹션 (배경 영상, 슬로건, CTA)
+│   │   ├── ChurchIntro.svelte  # 교회소개 섹션
+│   │   ├── WorshipSchedule.svelte  # 예배안내 섹션
+│   │   ├── SermonSection.svelte    # 금주의 말씀 섹션
+│   │   └── MapSection.svelte   # 오시는길 섹션 (카카오맵 초기화 포함)
 │   ├── assets/
 │   │   └── favicon.svg
-│   └── index.js         # 현재 비어있음
-└── app.html             # HTML 진입점
+│   └── index.js                # 공용 모듈 진입점 (현재 비어있음)
+└── app.html                    # HTML 진입점 (카카오맵 스크립트 로드)
 
 static/
 ├── background_02.mp4    # 히어로 배경 영상 (현재 사용 중)
@@ -129,6 +135,8 @@ font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Robo
 
 - Svelte scoped 스타일 사용 (`<style>` 블록)
 - 전역 스타일은 `+layout.svelte`의 `:global()` 사용
+  - `.container`, `.section`, `.section-title` 등 공통 클래스는 `+layout.svelte`에 정의
+  - 각 컴포넌트는 자신의 고유 스타일만 scoped로 작성
 - 애니메이션: `.section` 클래스에 `opacity: 0 → 1`, `translateY(50px → 0)` 스크롤 트리거
 - 트랜지션: `transition: all 0.3s ease` 기본
 
@@ -136,7 +144,7 @@ font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Robo
 
 ## 콘텐츠 수정 위치
 
-### 설교 영상 업데이트 (`+page.svelte` 143~156줄 근처)
+### 설교 영상 업데이트 → `src/lib/components/SermonSection.svelte`
 
 ```svelte
 <h3 class="sermon-title">설교 제목 (성경 본문)</h3>
@@ -145,13 +153,17 @@ font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Robo
 <button on:click={() => window.open('https://www.youtube.com/watch?v=VIDEO_ID', '_blank')}>
 ```
 
-### 예배 시간표 수정 (`+page.svelte` 79~140줄 근처)
+### 예배 시간표 수정 → `src/lib/components/WorshipSchedule.svelte`
 
 `.schedule-card` 내부의 `<h3>`, `.time`, `.location` 수정
 
-### 교회소개 텍스트 수정 (`+page.svelte` 63~76줄 근처)
+### 교회소개 텍스트 수정 → `src/lib/components/ChurchIntro.svelte`
 
 `.new-section-content` 내부 `<p>` 태그들 수정
+
+### 히어로 배경 영상·슬로건 수정 → `src/lib/components/Hero.svelte`
+
+### 오시는길 지도 설정 → `src/lib/components/MapSection.svelte`
 
 ---
 
@@ -169,7 +181,7 @@ npm run lint      # ESLint + Prettier 검사
 
 ## 주의사항 (하지 말아야 할 것)
 
-- **카카오맵 key 변경 금지**: `+page.svelte`의 `daum.roughmap.Lander` 설정의 `key`와 timestamp, container ID는 건드리지 않는다
+- **카카오맵 key 변경 금지**: `MapSection.svelte`의 `daum.roughmap.Lander` 설정의 `key`와 timestamp, container ID는 건드리지 않는다
 - **전역 CSS 남용 금지**: `:global()`은 `+layout.svelte`에서만 사용, 각 페이지는 scoped 스타일 사용
 - **기존 섹션 ID 변경 주의**: 히어로 버튼의 `scrollIntoView`가 ID에 의존함 (`#new-section`, `#worship`, `#sermon`, `#road`)
 - **배경 영상 파일 삭제 금지**: `static/` 폴더의 MP4 파일들은 참조 중이거나 예비용으로 보관 중
@@ -178,7 +190,7 @@ npm run lint      # ESLint + Prettier 검사
 
 ## 향후 개발 계획
 
-- [ ] 컴포넌트 분리 (`src/lib/components/`)
+- [x] 컴포넌트 분리 (`src/lib/components/`) — 완료
 - [ ] 데이터 분리 (`src/lib/data/sermons.js`, `schedule.js`)
 - [ ] 페이지별 라우트 추가 (교회학교, 커뮤니티 등)
 - [ ] `adapter-static` 전환 검토
