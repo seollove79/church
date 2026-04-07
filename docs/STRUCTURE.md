@@ -12,14 +12,20 @@ church/
 ├── src/
 │   ├── routes/
 │   │   ├── +layout.svelte           # 모든 페이지 공통 레이아웃 + 전역 스타일
-│   │   └── +page.svelte             # 메인 페이지 (컴포넌트 조립만, ~20줄)
+│   │   ├── +page.svelte             # 메인 페이지 (컴포넌트 조립만, ~20줄)
+│   │   └── api/
+│   │       └── sermon/
+│   │           └── +server.js       # 설교 데이터 API (GET: 읽기, POST: 저장)
 │   ├── lib/
 │   │   ├── components/              # 섹션 컴포넌트
 │   │   │   ├── Hero.svelte          # 히어로 섹션
 │   │   │   ├── ChurchIntro.svelte   # 교회소개 섹션
 │   │   │   ├── WorshipSchedule.svelte  # 예배안내 섹션
-│   │   │   ├── SermonSection.svelte # 금주의 말씀 섹션
-│   │   │   └── MapSection.svelte    # 오시는길 섹션 (카카오맵 초기화)
+│   │   │   ├── SermonSection.svelte # 금주의 말씀 섹션 (관리 모달 포함)
+│   │   │   ├── MapSection.svelte    # 오시는길 섹션 (카카오맵 초기화)
+│   │   │   └── ScrollToTop.svelte   # 맨 위로 이동 버튼 (공통)
+│   │   ├── data/
+│   │   │   └── sermons.json         # 설교 데이터 영구 저장 파일
 │   │   ├── assets/
 │   │   │   └── favicon.svg          # 브라우저 탭 아이콘
 │   │   └── index.js                 # 공용 모듈 진입점 (현재 비어있음)
@@ -156,9 +162,19 @@ src/routes/
 
 ### SermonSection.svelte (`#sermon`)
 ```
-├── .sermon-title
-├── .sermon-meta
-└── .sermon-actions         # 설교말씀보기, 영상더보기 버튼
+├── <script>
+│   ├── onMount() → GET /api/sermon  # 페이지 로드 시 데이터 fetch
+│   ├── openModal() / closeModal()
+│   └── save() → POST /api/sermon    # 저장 후 화면 즉시 반영
+├── .section-title
+│   └── "씀" (.admin-trigger)        # 클릭 시 관리 모달 오픈
+├── .sermon-title                    # sermons.json의 title
+├── .sermon-meta                     # sermons.json의 meta
+├── .sermon-actions                  # 설교말씀보기(videoUrl), 영상더보기
+└── 관리 모달 (.modal-backdrop)
+    ├── 설교 제목 input
+    ├── 설교 정보 input
+    └── YouTube URL input
 ```
 
 ### MapSection.svelte (`#road`)
@@ -199,33 +215,32 @@ import { page } from '$app/stores';
 
 ---
 
-## 데이터 분리 계획 (향후)
+## 데이터 레이어
 
-콘텐츠를 코드와 분리하면 비개발자도 수정하기 쉬워집니다.
+### sermons.json (구현 완료)
+
+설교 데이터를 코드와 분리하여 `src/lib/data/sermons.json`에 저장합니다.
+
+```json
+{
+  "title": "설교 제목 (성경 본문)",
+  "meta": "설교자 : 윤찬영 목사 / 설교일: YYYY-MM-DD",
+  "videoUrl": "https://www.youtube.com/watch?v=..."
+}
+```
+
+### API 구조 (`/api/sermon`)
+
+```
+GET  /api/sermon  →  sermons.json 읽어서 JSON 반환
+POST /api/sermon  →  body { title, meta, videoUrl } 받아서 sermons.json 덮어쓰기
+```
+
+### 예배 시간표 데이터 분리 (향후 계획)
 
 ```
 src/lib/data/
-├── sermons.js        # 설교 영상 목록
-└── schedule.js       # 예배 시간표
-```
-
-```js
-// src/lib/data/sermons.js 예시
-export const latestSermon = {
-  title: '다니엘이 전한 하나님 아버지의 마음 (다니엘 2:20-23)',
-  preacher: '윤찬영 목사',
-  date: '2025-11-23',
-  youtubeId: 'wAQLPjgix_4'
-};
-```
-
-```js
-// src/lib/data/schedule.js 예시
-export const seniorWorship = [
-  { name: '새벽기도회', time: '오전 05:00', location: '본당' },
-  { name: '주일 오전예배', time: '오전 10:30', location: '본당' },
-  // ...
-];
+└── schedule.json     # 예배 시간표 (미구현)
 ```
 
 ---

@@ -7,28 +7,31 @@
 
 ## 1. 설교 영상 업데이트
 
-**위치**: `src/lib/components/SermonSection.svelte`
+### 방법 1 — 사이트에서 직접 수정 (권장)
 
-### 수정할 항목
+1. 사이트에서 "금주의 말**씀**"의 "씀" 글자 클릭
+2. 관리 모달에서 제목 / 설교 정보 / YouTube URL 입력
+3. 저장 클릭 → 화면 즉시 반영, `sermons.json`에 자동 저장
 
-```svelte
-<!-- 설교 제목 -->
-<h3 class="sermon-title">다니엘이 전한 하나님 아버지의 마음 (다니엘 2:20-23)</h3>
+### 방법 2 — 파일 직접 수정
 
-<!-- 설교 날짜 -->
-<p class="sermon-meta">설교자: 윤찬영 목사 / 설교일: 2025-11-23</p>
+**위치**: `src/lib/data/sermons.json`
 
-<!-- YouTube 영상 URL -->
-<button on:click={() => window.open('https://www.youtube.com/watch?v=wAQLPjgix_4', '_blank')}>
-	설교말씀보기
-</button>
+```json
+{
+  "title": "설교 제목 (성경 본문)",
+  "meta": "설교자 : 윤찬영 목사 / 설교일: YYYY-MM-DD",
+  "videoUrl": "https://www.youtube.com/watch?v=VIDEO_ID"
+}
 ```
+
+> ⚠️ `title`, `meta`, `videoUrl` 키 이름은 변경하지 마세요.
 
 ### YouTube URL 찾는 방법
 
 1. YouTube에서 설교 영상 페이지 접속
 2. 주소창의 URL 복사: `https://www.youtube.com/watch?v=XXXXXXXXXXX`
-3. `watch?v=` 뒤의 영상 ID만 교체하거나 URL 전체를 교체
+3. URL 전체를 `videoUrl` 값에 붙여넣기
 
 ---
 
@@ -173,4 +176,16 @@
 "수요예배 시간을 오후 7:30에서 오후 7:00로 변경해줘"
 
 "청년부 예배 장소를 본당으로 변경해줘"
+```
+
+---
+
+## 설교 데이터 저장 구조
+
+설교 정보는 `src/lib/data/sermons.json`에 저장되며,
+`/api/sermon` API를 통해 읽기(GET)·쓰기(POST)가 이루어집니다.
+
+```
+사이트 로드  →  GET /api/sermon  →  sermons.json 읽기  →  화면 표시
+모달 저장    →  POST /api/sermon  →  sermons.json 덮어쓰기  →  영구 저장
 ```

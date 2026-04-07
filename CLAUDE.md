@@ -36,14 +36,20 @@ Claude와 협업 시 이 파일이 자동으로 로드됩니다.
 src/
 ├── routes/
 │   ├── +layout.svelte          # 헤더, 전역 네비게이션, 전역 스타일
-│   └── +page.svelte            # 메인 페이지 (컴포넌트 조립만, ~20줄)
+│   ├── +page.svelte            # 메인 페이지 (컴포넌트 조립만, ~20줄)
+│   └── api/
+│       └── sermon/
+│           └── +server.js      # 설교 데이터 GET/POST API
 ├── lib/
 │   ├── components/             # 섹션 컴포넌트
 │   │   ├── Hero.svelte         # 히어로 섹션 (배경 영상, 슬로건, CTA)
 │   │   ├── ChurchIntro.svelte  # 교회소개 섹션
 │   │   ├── WorshipSchedule.svelte  # 예배안내 섹션
-│   │   ├── SermonSection.svelte    # 금주의 말씀 섹션
-│   │   └── MapSection.svelte   # 오시는길 섹션 (카카오맵 초기화 포함)
+│   │   ├── SermonSection.svelte    # 금주의 말씀 섹션 (관리 모달 포함)
+│   │   ├── MapSection.svelte   # 오시는길 섹션 (카카오맵 초기화 포함)
+│   │   └── ScrollToTop.svelte  # 맨 위로 이동 버튼 (공통)
+│   ├── data/
+│   │   └── sermons.json        # 설교 데이터 영구 저장 파일
 │   ├── assets/
 │   │   └── favicon.svg
 │   └── index.js                # 공용 모듈 진입점 (현재 비어있음)
@@ -144,13 +150,20 @@ font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Robo
 
 ## 콘텐츠 수정 위치
 
-### 설교 영상 업데이트 → `src/lib/components/SermonSection.svelte`
+### 설교 영상 업데이트 → `src/lib/data/sermons.json` 또는 관리 모달
 
-```svelte
-<h3 class="sermon-title">설교 제목 (성경 본문)</h3>
-<p class="sermon-meta">설교자: 윤찬영 목사 / 설교일: YYYY-MM-DD</p>
-<!-- YouTube URL 변경 -->
-<button on:click={() => window.open('https://www.youtube.com/watch?v=VIDEO_ID', '_blank')}>
+**방법 1 — 사이트에서 직접 수정 (권장)**
+- 사이트의 "금주의 말**씀**" 에서 "씀" 클릭 → 관리 모달 오픈 → 저장
+- 저장 시 `sermons.json`에 자동 반영, 새로고침 후에도 유지
+
+**방법 2 — 파일 직접 수정**
+```json
+// src/lib/data/sermons.json
+{
+  "title": "설교 제목 (성경 본문)",
+  "meta": "설교자: 윤찬영 목사 / 설교일: YYYY-MM-DD",
+  "videoUrl": "https://www.youtube.com/watch?v=VIDEO_ID"
+}
 ```
 
 ### 예배 시간표 수정 → `src/lib/components/WorshipSchedule.svelte`
@@ -185,13 +198,16 @@ npm run lint      # ESLint + Prettier 검사
 - **전역 CSS 남용 금지**: `:global()`은 `+layout.svelte`에서만 사용, 각 페이지는 scoped 스타일 사용
 - **기존 섹션 ID 변경 주의**: 히어로 버튼의 `scrollIntoView`가 ID에 의존함 (`#new-section`, `#worship`, `#sermon`, `#road`)
 - **배경 영상 파일 삭제 금지**: `static/` 폴더의 MP4 파일들은 참조 중이거나 예비용으로 보관 중
+- **sermons.json 구조 변경 금지**: API(`+server.js`)와 컴포넌트가 `title`, `meta`, `videoUrl` 키에 의존함
 
 ---
 
 ## 향후 개발 계획
 
 - [x] 컴포넌트 분리 (`src/lib/components/`) — 완료
-- [ ] 데이터 분리 (`src/lib/data/sermons.js`, `schedule.js`)
+- [x] 설교 데이터 분리 (`src/lib/data/sermons.json`) — 완료
+- [x] 설교 관리 모달 + API (`/api/sermon`) — 완료
+- [ ] 예배 시간표 데이터 분리 (`src/lib/data/schedule.json`)
 - [ ] 페이지별 라우트 추가 (교회학교, 커뮤니티 등)
 - [ ] `adapter-static` 전환 검토
 - [ ] OG 태그 및 SEO 메타 정보 추가
